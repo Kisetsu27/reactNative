@@ -19,6 +19,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   hello: {
-    fontSize: 24,
+    fontSize: 36,
   }
 });
