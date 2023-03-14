@@ -1,13 +1,12 @@
-import { View, Text, StyleSheet, StatusBar, SafeAreaView, Platform, Image, ScrollView} from 'react-native'
+import { View, Text, StyleSheet, StatusBar, SafeAreaView, Platform, Image, ScrollView, Pressable} from 'react-native'
 import React from 'react'
 
-import FontAwesome from '@expo/vector-icons/FontAwesome'
 
 import Ionicons  from '@expo/vector-icons/Ionicons'
 
 
 
-export default function Home() {
+export default function Home({navigation}) {
   return (
     <SafeAreaView style = {{ flex: 1}}>
       <ScrollView  style={styles.container}>
@@ -38,6 +37,9 @@ export default function Home() {
             <Ionicons name = 'ellipse' style = {styles.cardShape} />
           </View>
         </View>
+        <Pressable onPress={() => {
+          navigation.navigate('Details')
+        }}>
         <View style = {styles.featureContainer}>
           <View style = {styles.featureTop}>
             <Text style = {styles.subTitle} >Бодит амьдралаас сэдэвлэв</Text>
@@ -45,6 +47,7 @@ export default function Home() {
           </View>
           <Image source={require('../../assets/feat.jpg')} style = {{width: '100%' , height:500}} />
         </View>
+        </Pressable>
       </ScrollView>
     </SafeAreaView>
   )
@@ -89,14 +92,6 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'space-between',
     gap: 13,
-    shadowColor: '#9e9e9e',
-    shadowOffset: {
-      width:0,
-      height: 0,
-    },
-    shadowOpacity: 0.22,
-    shadowRadius: 2.22,
-    elevation: 20,
   },
   card1: {
     backgroundColor: '#10C9CB',
@@ -143,16 +138,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    gap: 13,
-    shadowColor: '#9e9e9e',
-    shadowOffset: {
-      width:0,
-      height: 0,
-    },
-    shadowOpacity: 0.22,
-    shadowRadius: 2.22,
-    elevation: 20,
     marginTop: 30,
+    overflow: 'hidden',
+    marginBottom: 100,
   },
   featureTop: {
     margin: 15
