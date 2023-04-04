@@ -13,6 +13,8 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import HomeScreen from './source/screens/Home'
 import DetailScreeen from './source/screens/Details'
 
+import Aimag from './source/screens/AimagScreen'
+
 import p1 from './source/screens/Page1'
 import p2 from './source/screens/Page2'
 import p3 from './source/screens/Page3'
@@ -31,11 +33,12 @@ export default function App() {
   const HomeTab =() =>{
     return (
       <Homestack.Navigator
+        initialRouteName = "Aimag"
         screenOptions={{
           headerShown: false
         }}
       >
-        <Homestack.Screen name = 'Home' component={HomeScreen} />
+        <Homestack.Screen name = 'Aimag' component={Aimag} />
         <Homestack.Screen name = 'Details' component={DetailScreeen} />
       </Homestack.Navigator>
     )
