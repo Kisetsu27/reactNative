@@ -45,7 +45,7 @@ export default function Home({navigation}) {
             <Text style = {styles.subTitle} >Бодит амьдралаас сэдэвлэв</Text>
             <Text style = {styles.title} >Энэ 7 хоногийн онцлох</Text>
           </View>
-          <Image source={require('../../assets/feat.jpg')} style = {{width: '100%' , height:500}} />
+          <Image source={require('../../assets/feat.png')} style = {{width: '100%' , height:500}} />
         </View>
         </Pressable>
       </ScrollView>
@@ -57,8 +57,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F5F6F8',
-    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
     padding: 20,
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
   scrollView: {
     flex: 1,
