@@ -1,13 +1,15 @@
-import { View, Text, StyleSheet,ScrollView, Image, StatusBar, Platform, Dimensions } from 'react-native'
+import { View, Text, StyleSheet,ScrollView, Image, StatusBar, Platform, Dimensions, Pressable } from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native'
 import { ImageBackground } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import { Ionicons } from '@expo/vector-icons'
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view'
+import { GestureHandlerRootView, PanGestureHandler } from 'react-native-gesture-handler'
 import Carousel from 'react-native-reanimated-carousel'
 
 const width = Dimensions.get('window').width;
+
 
 const FirstRoute = () => (
     <View style={styles.tab1} >
@@ -18,11 +20,11 @@ const FirstRoute = () => (
                 autoPlay={true}
                 data={[...new Array(6).keys()]}
                 scrollAnimationDuration={1000}
-                panGestureHandlerProps={{
-                    activeOffsetY: [-10, 10]
-                }}
-                pagingEnabled = {false}
+                pagingEnabled = {true}
                 enable = {true}
+                panGestureHandlerProps={{
+                    activeOffsetX: [-10, 10],
+                }}
                 // onSnapToItem={(index) => console.log('current index:', index)}
                 renderItem={({ index }) => (
                     <View
@@ -41,7 +43,12 @@ const FirstRoute = () => (
                     </View>
                 )}
             />
-                <ScrollView style = {styles.genre} horizontal = {true}showsHorizontalScrollIndicator = {false} nestedScrollEnabled={true} contentContainerStyle = {{flexGrow: 1, gap: 20}}>
+                <ScrollView 
+                    style = {styles.genre} 
+                    horizontal = {true} 
+                    showsHorizontalScrollIndicator = {false} 
+                    contentContainerStyle = {{gap: 20}}
+                >
                     <View style = {styles.genreItem}>
                         <Text style = {styles.genreItemText}>VOO Originals</Text>
                     </View>
@@ -55,6 +62,7 @@ const FirstRoute = () => (
                         <Text style = {styles.genreItemText}>Hollywood</Text>
                     </View>
                 </ScrollView>
+                <Text style = {styles.showcaseTitle}>Их үзсэн</Text>
     </View>
   );
   
@@ -108,7 +116,7 @@ export default function Home() {
     })
 
   return (
-    <SafeAreaView style = {styles.container}>
+    <GestureHandlerRootView style = {styles.container}>
         <LinearGradient 
             colors = {['#20262C', '#14151A']}
             style = {styles.gradient}
@@ -136,14 +144,16 @@ export default function Home() {
                             onIndexChange={setIndex}
                             initialLayout={initialLayout}
                             renderTabBar={renderTabBar}
-                            style = {{height: 500, zIndex: -100}}
+                            nestedScrollEnabled = {true}
+                            style = {{height: 500}}
+                            swipeEnabled = {false}
                         />
-                    
+                  
 
                 </ScrollView>
             </ImageBackground>
         </LinearGradient>
-    </SafeAreaView>
+    </GestureHandlerRootView>
   )
 }
 
@@ -175,7 +185,7 @@ const styles = StyleSheet.create({
         marginRight: 'auto'
     },
     headerIcon: {
-        fontSize: 35,
+        fontSize: 30,
         color: '#fff'
     },
     tabBar: {
@@ -200,22 +210,24 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
     },
-    // tab1: {
-    //     flex: 1
-    // },
     genre: {
-        flexDirection: 'row',
-        marginVertical: 30,
-        zIndex: 100,
+        // flexDirection: 'row',
+        marginTop: 30,
     },
     genreItem: {
         backgroundColor: '#fff',
         paddingVertical: 10,
         paddingHorizontal: 15,
-        borderRadius: 20,
+        borderRadius: 50,
     },
     genreItemText: {
         color: '#5CD1C9',
-        fontSize: 16
+        fontSize: 14
+    },
+    showcaseTitle: {
+        color: '#fff',
+        fontSize: 16,
+        marginVertical: 10,
+        fontWeight: 'bold'
     }
 })
