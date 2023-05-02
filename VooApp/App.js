@@ -10,23 +10,16 @@ import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons"
 
 import HomeScreen from './source/screens/Home'
 import ProfileScreen from './source/screens/Profile'
+import DetailScreen from './source/screens/Details'
+import Details from "./source/screens/Details";
 
 const Stack = createNativeStackNavigator()
 const Tab = createBottomTabNavigator();
 
-export default function App() {
-  return(
-    // <NavigationContainer>
-    //   <Stack.Navigator
-    //   screenOptions={{
-    //     headerShown: false
-    //   }}>
-    //     <Stack.Screen name='Home' component={homeScreen} />
-    //   </Stack.Navigator>
-    // </NavigationContainer>
-    <NavigationContainer>
+const BottomTab = () =>{
+  return (
       <Tab.Navigator
-      initialRouteName="Profile"
+      initialRouteName="Home"
         screenOptions={{
           headerShown: false,
           tabBarActiveTintColor: '#43C4E1',
@@ -60,10 +53,27 @@ export default function App() {
           }}
         />
       </Tab.Navigator>
+  )
+}
+
+export default function App() {
+  return(
+    <NavigationContainer>
+      <Stack.Navigator
+      screenOptions={{
+        headerShown: false
+      }}>
+        <Stack.Screen name='BottomTab' component={BottomTab} />
+        <Stack.Screen name='Details' component={DetailScreen} />
+      </Stack.Navigator>
       <StatusBar style = 'light' />
     </NavigationContainer>
+
+    
   )
 } 
+
+
 
 const styles = StyleSheet.create({
   mainContainer: {

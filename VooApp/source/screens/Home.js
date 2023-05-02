@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet,ScrollView, Image, StatusBar, Platform, Dimensions, Pressable, useWindowDimensions } from 'react-native'
+import { View, Text, StyleSheet,ScrollView, Image, StatusBar, Platform, Dimensions, Pressable } from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native'
 import { ImageBackground } from 'react-native'
@@ -7,7 +7,6 @@ import { Ionicons } from '@expo/vector-icons'
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view'
 import { GestureHandlerRootView, PanGestureHandler } from 'react-native-gesture-handler'
 import Carousel from 'react-native-reanimated-carousel'
-
 const width = Dimensions.get('window').width;
 
 
@@ -68,7 +67,8 @@ const images3 = [
 
 
 
-const FirstRoute = () => (
+
+const FirstRoute = ({navigation}) => (
     <View style={styles.tab1} >
         <Carousel
                 loop
@@ -97,9 +97,9 @@ const FirstRoute = () => (
             showsHorizontalScrollIndicator = {false} 
             contentContainerStyle = {{gap: 20, justifyContent: 'center', alignItems: 'center'}}
         >
-            <View style = {styles.genreItem}>
-                <Text style = {styles.genreItemText}>VOO Originals</Text>
-            </View>
+                <View style = {styles.genreItem}>
+                    <Text style = {styles.genreItemText}>VOO Originals</Text>
+                </View>
             <View style = {styles.genreItem}>
                 <Text style = {styles.genreItemText}>Монгол</Text>
             </View>
@@ -117,10 +117,14 @@ const FirstRoute = () => (
             showsHorizontalScrollIndicator = {false} 
             contentContainerStyle = {{gap: 10}}
         >
-            <View style = {styles.featItem}>
-                <Image source = {require("../../assets/img/feature/bujo.jpg")} style = {styles.featImg} />
-                <Text style = {styles.featTxt}>Bujo</Text>
-            </View>
+            <Pressable onPress = {() => {
+                alert(navigation)
+            }}>
+                <View style = {styles.featItem}>
+                    <Image source = {require("../../assets/img/feature/bujo.jpg")} style = {styles.featImg} />
+                    <Text style = {styles.featTxt}>Bujo</Text>
+                </View>
+            </Pressable>
             <View style = {styles.featItem}>
                 <Image source = {require("../../assets/img/feature/2.jpg")} style = {styles.featImg} />
                 <Text style = {styles.featTxt}>Бэрүүд</Text>
@@ -186,6 +190,7 @@ const FirstRoute = () => (
   );
   
 const SecondRoute = () => (
+    
     <View style={styles.tab1} >
     <Carousel
             loop
@@ -202,7 +207,7 @@ const SecondRoute = () => (
                     }}
                 >
                     <Image source = {images2[index].image} resizeMode='contain' style = {{ width: '100%'}}/>
-
+                    
                 </View>
                 
             )}
@@ -322,6 +327,7 @@ const ThirdRoute = () => (
 
                 </View>
                 
+                
             )}
         />
     <ScrollView 
@@ -420,6 +426,7 @@ const ThirdRoute = () => (
 
 
 
+
 const initialLayout = { width: Dimensions.get("window").width };
 
 const renderTabBar = (props) => (
@@ -452,11 +459,15 @@ export default function Home() {
     
     const renderScene = SceneMap({
         first: FirstRoute,
-    second: SecondRoute,
-    third: ThirdRoute,
+        second: SecondRoute,
+        third: ThirdRoute,
     })
+    
+
+    
 
   return (
+    
     <GestureHandlerRootView style = {styles.container}>
         <LinearGradient 
             colors = {['#20262C', '#14151A']}
