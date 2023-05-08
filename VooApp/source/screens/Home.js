@@ -7,7 +7,9 @@ import { Ionicons } from '@expo/vector-icons'
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view'
 import { GestureHandlerRootView, PanGestureHandler } from 'react-native-gesture-handler'
 import Carousel from 'react-native-reanimated-carousel'
+import { useNavigation } from '@react-navigation/native'
 const width = Dimensions.get('window').width;
+
 
 
 const images1 = [
@@ -68,7 +70,8 @@ const images3 = [
 
 
 
-const FirstRoute = ({navigation}) => (
+const FirstRoute = () => (
+
     <View style={styles.tab1} >
         <Carousel
                 loop
@@ -118,11 +121,11 @@ const FirstRoute = ({navigation}) => (
             contentContainerStyle = {{gap: 10}}
         >
             <Pressable onPress = {() => {
-                alert(navigation)
+                navigation.navigate('Details')
             }}>
                 <View style = {styles.featItem}>
-                    <Image source = {require("../../assets/img/feature/bujo.jpg")} style = {styles.featImg} />
-                    <Text style = {styles.featTxt}>Bujo</Text>
+                    <Image source = {require("../../assets/img/nr2.jpg")} style = {styles.featImg} />
+                    <Text style = {styles.featTxt}>No Rules 2: New World</Text>
                 </View>
             </Pressable>
             <View style = {styles.featItem}>
@@ -447,7 +450,7 @@ const renderTabBar = (props) => (
     />
 )
 
-export default function Home() {
+export default function Home({navigation}) {
 
     
     const [index, setIndex] = useState(0);
@@ -484,12 +487,12 @@ export default function Home() {
                 }}
             >
                 <ScrollView style = {styles.scrollView}>
-                    <View style = {styles.header}>
-                        <Image source = {require('../../assets/img/logo.png')} style = {styles.logo}/>
-                        <Ionicons name = 'notifications-outline' style = {styles.headerIcon} />
-                        <Ionicons name = 'search-outline' style = {styles.headerIcon} />
-                        <Ionicons name = 'time-outline' style = {styles.headerIcon} />
-                    </View>
+                        <View style = {styles.header}>
+                            <Image source = {require('../../assets/img/logo.png')} style = {styles.logo}/>
+                            <Ionicons name = 'notifications-outline' style = {styles.headerIcon} />
+                            <Ionicons name = 'search-outline' style = {styles.headerIcon} />
+                            <Ionicons name = 'time-outline' style = {styles.headerIcon} />
+                        </View>
                         <TabView
                             navigationState={{ index, routes }}
                             renderScene={renderScene}

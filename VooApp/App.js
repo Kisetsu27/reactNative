@@ -11,7 +11,6 @@ import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons"
 import HomeScreen from './source/screens/Home'
 import ProfileScreen from './source/screens/Profile'
 import DetailScreen from './source/screens/Details'
-import Details from "./source/screens/Details";
 
 const Stack = createNativeStackNavigator()
 const Tab = createBottomTabNavigator();
@@ -42,6 +41,7 @@ const BottomTab = () =>{
             ),
           
           }}
+          
         />
         <Tab.Screen 
           name="Profile" 
@@ -60,9 +60,10 @@ export default function App() {
   return(
     <NavigationContainer>
       <Stack.Navigator
-      screenOptions={{
-        headerShown: false
-      }}>
+        initialRouteName="Details"
+        screenOptions={{
+          headerShown: false
+        }}>
         <Stack.Screen name='BottomTab' component={BottomTab} />
         <Stack.Screen name='Details' component={DetailScreen} />
       </Stack.Navigator>
