@@ -1,6 +1,8 @@
 import { View, Text, ScrollView, SafeAreaView, StyleSheet, StatusBar, Image, Pressable, FlatList } from 'react-native'
-import React, {useState} from 'react'
+import React, {useState, useRef} from 'react'
 import { Ionicons } from '@expo/vector-icons'
+import { Video } from 'expo-av';
+
 
 const DATA = [
   {
@@ -72,18 +74,36 @@ const ReadMore = ({ children }) => {
 
 export default function Details() {
 
+const playbackInstance = useRef(null);
   
+  const [isFav, setIsFav] = useState()
+
+  const toggleFav = () => {
+    setIsFav(!isFav)
+  }
 
   return (
     <SafeAreaView style = {styles.container}>
-        <Image source={require("../../assets/img/nr2.jpg")} style = {styles.himage}/>
+      <View>
+      <Video
+        ref={playbackInstance}
+        style={styles.video}
+        useNativeControls
+        source={{ uri:"http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" }}
+        resizeMode="cover"
+        isLooping
+        />
+      </View>
+        {/* <Image source={require("../../assets/img/nr2.jpg")} style = {styles.himage}/> */}
         <View style = {styles.description}>
           <View>
             <Text style = {styles.title}>No Rules 2: New World (2023)</Text>
             <Image source={require('../../assets/img/rating.png')} style = {styles.rate} resizeMode='contain' />
             <Text style = {styles.age}>+16</Text>
           </View>
-          <Ionicons name = 'heart-outline' size = {30} style = {styles.heart}/>
+          <Pressable onPress={toggleFav}>
+            <Ionicons name = {isFav ? 'heart-outline' : 'heart'} size = {30} style = {isFav ? styles.heart : styles.hearted}/>
+          </Pressable>
         </View>
         <ReadMore>
 {`Эрдэс хотод шинэ хотын дарга ирж шударга ёсыг тогтоохоор ирнэ. Гэвч тэр шударга ёсны төлөө биш өөрийн эрх ашгийн төлөө ирсэн байдаг. Мөрдөгч Хангай Эрдэс хотод шударга ёс тогтоохын төлөө тэдний эсрэг тууштай тэмцэнэ.
@@ -136,6 +156,9 @@ const styles = StyleSheet.create({
   heart: {
     color: '#fff'
   },
+  hearted: {
+    color: '#44c2d2'
+  },
   readmore: {
     marginHorizontal: 20,
     marginVertical: 20,
@@ -174,5 +197,10 @@ const styles = StyleSheet.create({
     color: "#fff",
     flexWrap: 'wrap',
     width:240,
+  },
+  video: {
+    width: "100%",
+    height: 230,
+    position: 'relative'
   }
 })

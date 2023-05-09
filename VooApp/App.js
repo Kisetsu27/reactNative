@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { SafeAreaView, StyleSheet, Text, View, statu } from "react-native";
+import { SafeAreaView, StyleSheet, Text, View} from "react-native";
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -60,7 +60,7 @@ export default function App() {
   return(
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Details"
+        initialRouteName="BottomTab"
         screenOptions={{
           headerShown: false
         }}>
